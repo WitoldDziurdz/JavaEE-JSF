@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+    <f:viewParam name="courierId" value="#{editCourier.courierId}" />
+    <f:event type="preRenderView" listener="#{editCourier.init()}" />
+</f:metadata>
+<h:head>
+    <title>#{editCourier.courier}</title>
+</h:head>
+<h:body>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="common_header.xhtml" />
+        </ui:insert>
+    </div>
+
+    <h:form>
+        <h:panelGrid columns="3" styleClass="tabela">
+            <h:outputLabel value="Imie: " for="name"/>
+            <h:inputText
+                    id="name"
+                    value="#{editCourier.courier.name}"/>
+            <h:message for="name"/>
+
+            <h:outputLabel value="Nazwisko: " for="surname"/>
+            <h:inputText
+                    id="surname"
+                    value="#{editCourier.courier.surname}"/>
+            <h:message for="surname"/>
+
+            <h:outputLabel value="numer telefonu: " for="phone"/>
+            <h:inputText id="phone"
+                         value="#{editCourier.courier.phone}"
+                         validator="#{courierPhoneValidator.validate}"/>
+            <h:message for="phone"/>
+
+            <h:outputLabel value="wiek: " for="age"/>
+            <h:inputText
+                    id="age"
+                    value="#{editCourier.courier.age}"
+                    validator="#{courierAgeValidator.validate}"/>
+            <h:message for="age"/>
+
+            <h:outputLabel value="Paczki:" for="packs"/>
+            <h:selectManyListbox id="packs" value="#{editCourier.courier.packs}" converter="#{packConverter}">
+                <f:selectItems value="#{editCourier.packsAsSelectItems}"/>
+            </h:selectManyListbox>
+
+            <h:message for="packs"/>
+        </h:panelGrid>
+        <h:commandButton value="Zapisz" action="#{editCourier.saveCourier()}"/>
+        <h:button value="Powrót" outcome="list_courier.xhtml"/>
+    </h:form>
+</h:body>
+</html>

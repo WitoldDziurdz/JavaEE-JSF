@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+    <f:viewParam name="courierId" value="#{viewCourier.courierId}" required="true" id="courierId" />
+    <f:event type="preRenderView" listener="#{viewCourier.init()}"/>
+</f:metadata>
+<h:head>
+    <title>#{viewCourier.courier}</title>
+</h:head>
+<h:body>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="common_header.xhtml" />
+        </ui:insert>
+    </div>
+    <h:panelGrid columns="2">
+        <h:outputLabel value="Imie: " for="name"/>
+        <h:outputText id="name" value="#{viewCourier.courier.name}"/>
+        <h:outputLabel value="Nazwisko: " for="surname"/>
+        <h:outputText id="surname" value="#{viewCourier.courier.surname}"/>
+        <h:outputLabel value="numer telefonu: " for="phone"/>
+        <h:outputText id="phone" value="#{viewCourier.courier.phone}"/>
+        <h:outputLabel value="wiek: " for="age"/>
+        <h:outputText id="age" value="#{viewCourier.courier.age}"/>
+    </h:panelGrid>
+    <h:button value="Lista paczek kuriera" outcome="list_pack.xhtml">
+        <f:param name="courierId" value="#{viewCourier.courierId}" />
+    </h:button>
+    <h:button value="Powrót" outcome="list_courier.xhtml"/>
+</h:body>
+</html>

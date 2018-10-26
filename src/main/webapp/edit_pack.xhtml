@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+    <f:viewParam name="packId" value="#{editPack.packId}" />
+    <f:event type="preRenderView" listener="#{editPack.init()}" />
+</f:metadata>
+<h:head>
+    <title>#{editPack.pack}</title>
+</h:head>
+<h:body>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="common_header.xhtml" />
+        </ui:insert>
+    </div>
+    <h:form>
+        <h:panelGrid columns="3" styleClass="tabela">
+
+            <h:outputLabel value="Adress: " for="address"/>
+            <h:inputText id="address" value="#{editPack.pack.address}"/>
+            <h:message for="address"/>
+
+            <h:outputLabel value="Typ paczki: " for="typeSize"/>
+            <h:selectOneListbox  id="typeSize" value="#{editPack.pack.typeSize}">
+                <f:selectItems value="#{editPack.typeSizeAsSelectItems}"/>
+            </h:selectOneListbox >
+            <h:message for="typeSize"/>
+
+            <h:outputLabel value="Cena: " for="price"/>
+            <h:inputText
+                    id="price"
+                    value="#{editPack.pack.price}"
+                    validator="#{packPriceValidator.validate}"/>
+            <h:message for="price"/>
+
+            <h:outputLabel value="Ekspresowa: " for="express"/>
+            <h:selectBooleanCheckbox id="express" value="#{editPack.pack.express}" />
+            <h:message for="express"/>
+
+        </h:panelGrid>
+        <h:commandButton value="Zapisz" action="#{editPack.savePack()}"/>
+        <h:button value="Powrót" outcome="list_pack.xhtml"/>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+    <f:viewParam name="packId" value="#{viewPack.packId}" required="true" id="packId" />
+    <f:event type="preRenderView" listener="#{viewPack.init()}"/>
+</f:metadata>
+<h:head>
+    <title>#{viewPack.pack}</title>
+</h:head>
+<h:body>
+    <div id="header">
+        <ui:insert name="header" >
+            <ui:include src="common_header.xhtml" />
+        </ui:insert>
+    </div>
+    <h:panelGrid columns="2">
+        <h:outputLabel value="Numer paczki: " for="id"/>
+        <h:outputText id="id" value="#{viewPack.pack.id}"/>
+        <h:outputLabel value="Adress: " for="address"/>
+        <h:outputText id="address" value="#{viewPack.pack.address}"/>
+        <h:outputLabel value="Typ paczki: " for="typeSize"/>
+        <h:outputText id="typeSize" value="#{viewPack.pack.typeSize}"/>
+        <h:outputLabel value="Cena: " for="price"/>
+        <h:outputText id="price" value="#{viewPack.pack.price}"/>
+        <h:outputLabel value="Ekspresowa: " for="express"/>
+        <h:outputText id="express" value="#{viewPack.pack.express}"/>
+    </h:panelGrid>
+    <h:button value="Powrót" outcome="list_pack.xhtml"/>
+</h:body>
+</html>
